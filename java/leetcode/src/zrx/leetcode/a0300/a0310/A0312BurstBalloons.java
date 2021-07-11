@@ -36,6 +36,25 @@ public class A0312BurstBalloons {
         int size = nums.length;
         int[][] dp = new int[size + 1][size + 1];
 
+        // 子问题大小
+        for (int subQuestionLength = 1; subQuestionLength <= size; subQuestionLength++) {
+            // 子数组开头为 start，即问题为 [start, start+subQuestionLength)
+            for (int start = 0; start < size - subQuestionLength + 1; start++) {
+                // 最后戳破的气球
+                for (int lastBalloonIndex = start; lastBalloonIndex < start + subQuestionLength; lastBalloonIndex++) {
+                    dp[start][start + subQuestionLength] = Math.max(
+                            dp[start][start + subQuestionLength],
+                            dp[start][lastBalloonIndex] + dp[lastBalloonIndex + 1][start + subQuestionLength]
+                                    + (nums[lastBalloonIndex]
+                                    * ((start - 1 == -1) ? 1 : nums[start - 1])
+                                    * ((start + subQuestionLength == size) ? 1 : nums[start + subQuestionLength]))
+                    );
+                }
+            }
+        }
+//        System.out.println("------------");
+//        ArrayUtils.printArray(dp);
+//        System.out.println("------------");
         return dp[0][size];
     }
 }
