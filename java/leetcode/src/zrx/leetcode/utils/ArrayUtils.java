@@ -7,6 +7,10 @@ public class ArrayUtils {
         return arr;
     }
 
+    public static <T> T[] createArray(T... ts) {
+        return ts;
+    }
+
     public static void printArray(int[][] arr) {
         Arrays.stream(arr).forEach(ArrayUtils::printArray);
     }

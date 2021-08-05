@@ -52,9 +52,6 @@ public class A0312BurstBalloons {
                 }
             }
         }
-//        System.out.println("------------");
-//        ArrayUtils.printArray(dp);
-//        System.out.println("------------");
         return dp[0][size];
     }
 }
