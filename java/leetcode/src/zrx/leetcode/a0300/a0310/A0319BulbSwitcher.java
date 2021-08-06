@@ -55,6 +55,6 @@ public class A0319BulbSwitcher {
     }
 
     public int bulbSwitch(int n) {
-        return -1;
+        return (int)Math.sqrt(n);
     }
 }
