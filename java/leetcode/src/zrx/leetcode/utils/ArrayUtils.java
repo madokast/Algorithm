@@ -7,6 +7,9 @@ public class ArrayUtils {
         return arr;
     }
 
+    /**
+     * object array
+     */
     public static <T> T[] createArray(T... ts) {
         return ts;
     }
