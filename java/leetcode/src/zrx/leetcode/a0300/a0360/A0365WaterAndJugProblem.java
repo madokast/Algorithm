@@ -32,16 +32,34 @@ public class A0365WaterAndJugProblem {
 
     public static void main(String[] args) {
         A0365WaterAndJugProblem q = new A0365WaterAndJugProblem();
-        EqualCal.assertEqual(true, q.canMeasureWater(3,5,4));
-        EqualCal.assertEqual(false, q.canMeasureWater(2,6,5));
-        EqualCal.assertEqual(true, q.canMeasureWater(1,2,3));
+        EqualCal.assertEqual(true, q.canMeasureWater(3, 5, 4));
+        EqualCal.assertEqual(false, q.canMeasureWater(2, 6, 5));
+        EqualCal.assertEqual(true, q.canMeasureWater(1, 2, 3));
         // EqualCal.assertEqual(true, q.canMeasureWater(104659,104677,142424));
 
 
+        EqualCal.assertEqual(true, q.canMeasureWater2(3, 5, 4));
+        EqualCal.assertEqual(false, q.canMeasureWater2(2, 6, 5));
+        EqualCal.assertEqual(true, q.canMeasureWater2(1, 2, 3));
+        EqualCal.assertEqual(true, q.canMeasureWater2(104659, 104677, 142424));
+    }
 
-        //104659
-        //104677
-        //142424
+    public boolean canMeasureWater2(int jug1Capacity, int jug2Capacity, int targetCapacity) {
+        if (targetCapacity > jug1Capacity + jug2Capacity) return false;
+        if (jug1Capacity == 0) return targetCapacity == jug2Capacity;
+        if (jug2Capacity == 0) return targetCapacity == jug1Capacity;
+        int mcd = maxCommonDiv(jug1Capacity, jug2Capacity);
+        return targetCapacity % mcd == 0;
+    }
+
+    // 求最大公约数
+    private static int maxCommonDiv(int a, int b) {
+        if (a == b) return a;
+        int max = Math.max(a, b);
+        int min = Math.min(a, b);
+        int mod = max % min;
+        if (mod == 0) return min;
+        return maxCommonDiv(min, mod);
     }
 
 
@@ -61,7 +79,6 @@ public class A0365WaterAndJugProblem {
         // 是否发现目标，用于搜索时传递消息，如果发现，立即退出
         boolean[] found = new boolean[1];
         found[0] = false;
-
 
         dfs(stack, jug1Capacity, jug2Capacity, targetCapacity, happen, found);
 
